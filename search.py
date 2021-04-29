@@ -108,11 +108,29 @@ def depthFirstSearch(problem):
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
+    queue = util.Queue()
+    startLoc = problem.getStartState()
+    startNode = (startLoc, [])
+    queue.push(startNode)
+    visited = set()
+
+    while not queue.isEmpty():
+        node, action = queue.pop() # (34, 16) , []
+        
+        if problem.isGoalState(node):
+            print(action)
+            return action
+        visited.add(node)
+        successor = problem.getSuccessors(node)
+        for next_node, next_action, _ in successor:
+            if next_node not in visited:
+                queue.push((next_node, action + [next_action]))
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
+       
     util.raiseNotDefined()
 
 def nullHeuristic(state, problem=None):
